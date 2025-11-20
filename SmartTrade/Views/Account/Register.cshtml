@@ -1,0 +1,66 @@
+@model RegisterDTO
+
+@{
+    ViewBag.Title = "Register";
+    ViewBag.CurrentUrl = "~/Account/Register";
+}
+
+<div class="text-grey ml">
+    <span>Account</span>
+    <i class="fa-solid fa-caret-right"></i>
+    <span>Register</span>
+</div>
+
+<div class="box w-25">
+    <h2 class="text-grey mb">Create Account</h2>
+
+    <form method="post" asp-controller="Account" asp-action="Register" asp-antiforgery="true">
+        <div class="flex flex-direction-vertical">
+            <!-- Email -->
+            <label asp-for="Email" class="mt">Email:</label>
+            <input asp-for="Email" type="email" placeholder="Email Address" required="required" class="form-input mb" autofocus="autofocus" />
+            <span asp-validation-for="Email" class="text-red"></span>
+
+            <!-- Username -->
+            <label asp-for="Username" class="mt">Username:</label>
+            <input asp-for="Username" placeholder="Username" required="required" class="form-input mb" />
+            <span asp-validation-for="Username" class="text-red"></span>
+
+            <!-- Password -->
+            <label asp-for="Password" class="mt">Password:</label>
+            <input asp-for="Password" type="password" placeholder="Password" required="required" class="form-input mb" />
+            <span asp-validation-for="Password" class="text-red"></span>
+            <small class="text-grey">Password must be at least 6 characters with uppercase, lowercase, digit, and symbol</small>
+
+            <!-- Confirm Password -->
+            <label asp-for="ConfirmPassword" class="mt">Confirm Password:</label>
+            <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" required="required" class="form-input mb" />
+            <span asp-validation-for="ConfirmPassword" class="text-red"></span>
+
+            <!-- Validation Summary -->
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div asp-validation-summary="All" class="text-red mt"></div>
+            }
+
+            <!-- Submit Button -->
+            <button type="submit" class="button button-green-back mt">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Register</span>
+            </button>
+
+            <!-- Login Link -->
+            <div class="mt text-center">
+                <span class="text-grey">Already have an account? </span>
+                <a asp-controller="Account" asp-action="Login" class="link-hover">Login</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}
+

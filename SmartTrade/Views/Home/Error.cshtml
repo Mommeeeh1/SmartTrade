@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box">
+    <h1 class="text-red">Oops! Something went wrong</h1>
+    
+    <p>We're sorry, but an error occurred while processing your request.</p>
+    
+    @* Only show error details in Development (for security) *@
+    @if (ViewBag.ShowDetails == true && ViewBag.ErrorMessage != null)
+    {
+        <div class="text-grey mt">
+            <p><strong>Error Details:</strong></p>
+            <p>@ViewBag.ErrorMessage</p>
+        </div>
+    }
+    
+    <div style="margin-top: 30px;">
+        <a href="/" class="button button-blue-back" style="color: white; text-decoration: none;">
+            <i class="fa-solid fa-home"></i>
+            <span>Go to Homepage</span>
+        </a>
+    </div>
+</div>

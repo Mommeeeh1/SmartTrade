@@ -1,0 +1,33 @@
+﻿@model Dictionary<string, object>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="box">
+        @if (Model.ContainsKey("logo") && Model["logo"] != null)
+        {
+            <img src="@Model["logo"]" width="200px" alt="Company Logo" />
+        }
+        
+        <h1>@(Model.ContainsKey("name") ? Model["name"] : "Unknown") (@(Model.ContainsKey("ticker") ? Model["ticker"] : "N/A"))</h1>
+        
+        @if (Model.ContainsKey("finnhubIndustry") && Model["finnhubIndustry"] != null)
+        {
+<span class="pill">@Model["finnhubIndustry"]</span>
+        }
+
+        @if (Model.ContainsKey("exchange") && Model["exchange"] != null)
+        {
+<h3 class="mb">Exchange: <span class="pill">@Model["exchange"]</span></h3>
+        }
+
+        @if (Model.ContainsKey("price") && Model["price"] != null)
+        {
+<h1 class="stock-price"><span class="text-grey">$</span> @Model["price"]</h1>
+        }
+        
+        @if (Model.ContainsKey("ticker") && Model["ticker"] != null)
+        {
+            <a class="button button-blue-back mt" id="trade-button" href="~/Trade/Index/@Model["ticker"]" style="color: white; text-decoration: none; margin-top: 20px; display: inline-block;">Trade Now</a>
+        }
+    </div>
+}

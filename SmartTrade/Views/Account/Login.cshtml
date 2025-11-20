@@ -1,0 +1,63 @@
+@model LoginDTO
+
+@{
+    ViewBag.Title = "Login";
+    ViewBag.CurrentUrl = "~/Account/Login";
+}
+
+<div class="text-grey ml">
+    <span>Account</span>
+    <i class="fa-solid fa-caret-right"></i>
+    <span>Login</span>
+</div>
+
+<div class="box w-25">
+    <h2 class="text-grey mb">Login</h2>
+
+    <form method="post" asp-controller="Account" asp-action="Login" asp-antiforgery="true">
+        <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+        
+        <div class="flex flex-direction-vertical">
+            <!-- Email -->
+            <label asp-for="Email" class="mt">Email:</label>
+            <input asp-for="Email" type="email" placeholder="Email Address" required="required" class="form-input mb" autofocus="autofocus" />
+            <span asp-validation-for="Email" class="text-red"></span>
+
+            <!-- Password -->
+            <label asp-for="Password" class="mt">Password:</label>
+            <input asp-for="Password" type="password" placeholder="Password" required="required" class="form-input mb" />
+            <span asp-validation-for="Password" class="text-red"></span>
+
+            <!-- Remember Me -->
+            <div class="mt mb">
+                <input asp-for="RememberMe" type="checkbox" />
+                <label asp-for="RememberMe">Remember Me</label>
+            </div>
+
+            <!-- Validation Summary -->
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div asp-validation-summary="All" class="text-red mt"></div>
+            }
+
+            <!-- Submit Button -->
+            <button type="submit" class="button button-blue-back mt">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Login</span>
+            </button>
+
+            <!-- Register Link -->
+            <div class="mt text-center">
+                <span class="text-grey">Don't have an account? </span>
+                <a asp-controller="Account" asp-action="Register" class="link-hover">Register</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}
+

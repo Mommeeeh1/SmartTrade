@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+ <meta name="viewport" content="width=device-width" />
+ <title>@ViewBag.Title | SmartTrade</title>
+ <link href="~/StyleSheet.css" rel="stylesheet" />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+ <div class="container">
+  <div class="page-content">
+   <div class="margin-bottom">
+    <div class="flex" id="top-bar-div">
+     <div class="flex-1" id="app-title-div">
+      <h1 class="app-title">
+       <i class="fa-solid fa-money-bill-trend-up"></i>
+       SmartTrade
+      </h1>
+     </div>
+
+     <div class="flex-1 pr" id="search-box-div">
+
+      <input type="search" class="search-text" placeholder="Search Stocks" name="SearchText" />
+
+      @if (User.Identity != null && User.Identity.IsAuthenticated)
+      {
+       <!-- User is logged in - Show Settings dropdown with Logout -->
+       <div class="dropdown ml" style="position: relative; display: inline-block;">
+        <button class="button button-blue-back" style="min-width: auto; padding: 8px 12px;">
+         <i class="fa-solid fa-gear"></i>
+        </button>
+        <div class="dropdown-content" style="display: none; position: absolute; right: 0; background-color: white; min-width: 150px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-radius: 4px; margin-top: 5px;">
+         <form method="post" asp-controller="Account" asp-action="Logout" asp-antiforgery="true" style="margin: 0;">
+          <button type="submit" class="button button-red-back" style="width: 100%; border-radius: 0; border: none; text-align: left; padding: 10px 15px;">
+           <i class="fa-solid fa-right-from-bracket"></i>
+           <span>Logout</span>
+          </button>
+         </form>
+        </div>
+       </div>
+       <script>
+        document.addEventListener('DOMContentLoaded', function() {
+         const dropdown = document.querySelector('.dropdown');
+         const dropdownContent = document.querySelector('.dropdown-content');
+         if (dropdown && dropdownContent) {
+          dropdown.addEventListener('click', function(e) {
+           e.stopPropagation();
+           dropdownContent.style.display = dropdownContent.style.display === 'none' ? 'block' : 'none';
+          });
+          document.addEventListener('click', function() {
+           dropdownContent.style.display = 'none';
+          });
+         }
+        });
+       </script>
+      }
+      else
+      {
+       <!-- User is not logged in - Show Login button -->
+       <a asp-controller="Account" asp-action="Login" class="button button-blue-back ml">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        <span>Login</span>
+       </a>
+      }
+     </div>
+    </div>
+
+   </div>
+
+
+   <div class="navbar mb">
+    <ul>
+     @if (ViewBag.CurrentUrl == "~/Trade/Index")
+     {
+      <li><a asp-controller="Trade" asp-action="Index" class="nav-active">Trade</a></li>
+     }
+     else
+     {
+      <li><a asp-controller="Trade" asp-action="Index">Trade</a></li>
+     }
+
+     @if (ViewBag.CurrentUrl == "~/Stocks/Explore" || ViewBag.CurrentUrl == "~/Explore")
+     {
+      <li><a asp-controller="Stocks" asp-action="Explore" class="nav-active">Explore</a></li>
+     }
+     else
+     {
+      <li><a asp-controller="Stocks" asp-action="Explore">Explore</a></li>
+     }
+
+     @if (ViewBag.CurrentUrl == "~/Trade/Orders")
+     {
+      <li><a asp-controller="Trade" asp-action="Orders" class="nav-active">Orders</a></li>
+     }
+     else
+     {
+      <li><a asp-controller="Trade" asp-action="Orders">Orders</a></li>
+     }
+    </ul>
+   </div>
+
+   @RenderBody()
+  </div>
+
+ </div>
+
+ @await RenderSectionAsync("scripts", required: false)
+</body>
+</html>
