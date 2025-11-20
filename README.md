@@ -173,13 +173,7 @@ The solution also includes some additional projects that may have been created d
 6. **Access the application**
    - Navigate to `https://localhost:5001` or `http://localhost:5000`
 
-## 📝 Clean Architecture Benefits
 
-1. **Independence**: Business logic is independent of frameworks, UI, and databases
-2. **Testability**: Easy to test business logic without external dependencies
-3. **Flexibility**: Can swap out infrastructure (database, APIs) without changing business logic
-4. **Maintainability**: Clear separation makes code easier to understand and maintain
-5. **Scalability**: Easy to add new features without affecting existing code
 
 ## 🧪 Testing
 
@@ -192,11 +186,4 @@ dotnet test
 
 This project is open source and available for learning purposes.
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-
----
-
-**Built with Clean Architecture principles** 🏛️
 
